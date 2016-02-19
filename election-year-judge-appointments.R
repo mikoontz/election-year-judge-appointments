@@ -1,9 +1,9 @@
-Tf <- 80
-turnover_rate <- 1/20
+Tf <- 80 # 80 years
+turnover_rate <- 1/(6192/365) # Based on mean tenure of SC judges that started their term after 1900
 turnover_intensity <- Tf * turnover_rate
-election_year_prob <- 1/4
+election_year_prob <- 1/4 # Presidential election every 4 years
 
-num_of_judges <- 0:25
+num_of_judges <- 0:25 # We could go out to infinity to cover the whole support of the Poisson, but the probabilities drop off so significantly, we get a good approximation by stopping way before infinity. Even 25 is probably overkill.
 
 joint_probs <- dpois(num_of_judges, lambda=turnover_intensity) * dbinom(0, num_of_judges, prob=election_year_prob)
 sum(joint_probs)
